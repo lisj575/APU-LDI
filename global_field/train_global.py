@@ -284,21 +284,12 @@ if __name__ == '__main__':
 
         if args.mode == 'train':
             runner.train()
-        elif args.mode == 'upsamplenn':
-            epoch = 20000
-            filename = os.path.join(runner.base_exp_dir, 'checkpoints', 'ckpt_{:0>6d}.pth'.format(epoch))
-            if os.path.exists(filename):
-                runner.load_checkpoint('ckpt_{:0>6d}.pth'.format(epoch))
-                runner.upsample_nn(epoch=epoch, nn=20)
-            else:
-                print("No such checkpoint!")
-                print(filename)
         elif args.mode == 'upsample':
             epoch = 20000
             filename = os.path.join(runner.base_exp_dir, 'checkpoints', 'ckpt_{:0>6d}.pth'.format(epoch))
             if os.path.exists(filename):
                 runner.load_checkpoint('ckpt_{:0>6d}.pth'.format(epoch))
-                '''Use this code to match the reported results of pugan-4X and pu1k-4X.
+                '''Use the following code to match the reported results of pugan-4X and pu1k-4X datasets.
                 The differences are caused by repeating calling torch.rand() in upsample() during training.
                 The eleventh upsampled results are desired'''
                 # for i in range(10):
